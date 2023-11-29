@@ -1,59 +1,30 @@
-
-    <script>
-       var de = sessionStorage.getItem("de");;
-       var ate = sessionStorage.getItem("ate");;
-       <?php $de = 'de';?>
-       <?php $ate = 'ate';?>
-     </script>
-     <?php echo $de."= "; ?>
-     <?php echo $ate."= "; ?>
-
-     <script> document.cookie = "de = " + de <script>
-<?php
-   $dataDe = $_COOKIE['de'];
-   echo $dataDe;
-?>
-
 <h1>Consultar Faturamento</h1>
 <?php
-    
-    $sql = "call faturamento('',now());";
+
+
+    $de = $_COOKIE['de'];
+    $ate = $_COOKIE['ate'];
+
+    $sql = "call faturamento('{$de}','{$ate}');";
     $res = $conn->query($sql);
     $qtd = $res->num_rows;
-    
-    print"<button onclick=\"location.href='?page=clientes'\" class='btn btn-success mb-3'>Cadastrar Cliente</button>";
     
     if($qtd > 0) {
         print"<table class='table table-hover table-striped table-bordered'>";
         print "<tr>";
-        print "<th>CPF</th>";
-        print "<th>Nome</th>";
-        print "<th>E-mail</th>";
-        print "<th>Telefone</th>";
-        print "<th>Data de nascimento</th>";   
-        print "<th>Sexo</th>";
-        print "<th>CEP</th>";
-        print "<th>Endereço</th>";
-        print "<th>Ações</th>";
+        print "<th>De</th>";
+        print "<th>Até</th>";
+        print "<th>Entrada</th>";
+        print "<th>Saida</th>";
+        print "<th>Faturamento</th>";   
         print "</tr>";
         while($row = $res->fetch_object()) {
-            if(is_null($row->complemento) > 0){
-                $comp = ", ".$row->complemento;
-            }else{$comp = "";}
             print "<tr>";
-            print "<td>".$row->cpf."</td>";
-            print "<td>".$row->nome."</td>";
-            print "<td>".$row->email."</td>";
-            print "<td>".$row->telefone."</td>";
-            print "<td>".$row->data_nasc."</td>";   
-            print "<td>".$row->sexo."</td>";
-            print "<td>".$row->cep."</td>";
-            print "<td style='width: 200px'>".$row->rua.", ".$row->numero.$comp.", ".$row->bairro." - ".$row->cidade.", ".$row->estado."</td>";
-            print "<td>
-            <button onclick=\"location.href='?page=editarCliente&cpf=".$row->cpf."'\" class='btn btn-primary mb-1' >Editar</button>
-                <button onclick=\"if(confirm('Tem certeza que deseja excluir?')){location.href='?page=salvarCliente&acao=excluir&cpf=".$row->cpf."';}else{false;}\"
-                class='btn btn-danger'>Excluír</button>
-            </td>";
+            print "<td>".date("d/m/Y ",strtotime($row->data_ini))."</td>";
+            print "<td>".date("d/m/Y ",strtotime($row->data_fim))."</td>";
+            print "<td>". 0 + $row->Entrada." R$</td>";            
+            print "<td>". 0 + $row->Saida." R$</td>";
+            print "<td>". 0 + $row->faturamento." R$</td>";   
             print "</tr>";
         }
         print"</table>";

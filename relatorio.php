@@ -1,6 +1,35 @@
-<h1>Relatório Mensal</h1>
+<script src="js/script.js"></script>
 <hr>
 <?php
+    print "<h1>Calcular Faturamento</h1>";
+
+    print"
+    <div class='mb-3' style='display: flex'>
+        <label for='de' style='margin-right: 10px' class='mt-1'>De:</label>
+        <input type='date' name='de' id='de' class='form-control' style='margin-right: 20px'>
+        <label for='ate' style='margin-right: 10px' class='mt-1'>Até:</label>
+        <input type='date' name='ate' id='ate' class='form-control' style='margin-right: 20px'>
+    </div>";
+
+
+
+    print "
+        <button  id='calcularFaturamento'  class='btn btn-primary mb-3' 
+        onclick=\"
+
+        var de = document.getElementById('de').value;
+        var ate = document.getElementById('ate').value;
+        document.cookie = 'de = ' + de;
+        document.cookie = 'ate = ' + ate;
+
+        sessionStorage.setItem('de', document.getElementById('de').value);
+        sessionStorage.setItem('ate', document.getElementById('ate').value);
+        location.href ='?page=faturamento'
+        \">Calcular faturamento <i class='fa-solid fa-calculator'></i></button>
+        <hr>
+    ";
+
+    print "<h1>Relatório Mensal</h1>";
 
     $sql = "select * from total_vendas_mes";
     $res = $conn->query($sql);
@@ -71,33 +100,15 @@
             print "</tr>";
         }
         print"</table>";
+        print "<hr>";
         print"Valor total de entradas do mês: ".$row4->faturamento2." R$";
         print "<hr>";
         print "Faturamento do mês: ".($row3->faturamento - $row4->faturamento2)." R$";
+	print "<hr class='mb-5'>";
     }else{
         print "<p class='alert alert danger'>Não há nenhum registro!</p>";
     }
-    print "<hr>";
-    print "<h2>Calcular Faturamento</h2>";
 
-    print"
-    <div class='mb-3' style='display: flex'>
-        <label for='de' style='margin-right: 10px' class='mt-1'>De:</label>
-        <input type='date' name='de' id='de' class='form-control' style='margin-right: 20px'>
-        <label for='ate' style='margin-right: 10px' class='mt-1'>Até:</label>
-        <input type='date' name='ate' id='ate' class='form-control' style='margin-right: 20px'>
-    </div>";
 
-    print "
-    <script>
-        sessionStorage.setItem('de', document.getElementById('de').value);
-        sessionStorage.setItem('ate', document.getElementById('ate').value);
-    </script>
-    ";
-
-    print "
-        <button onclick=\"location.href='?page=faturamento'\" class='btn btn-primary mb-3' >Calcular faturamento <i class='fa-solid fa-calculator'></i></button>
-        <hr>
-    ";
 
 ?>
