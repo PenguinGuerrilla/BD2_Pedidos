@@ -8,7 +8,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
   </head>
-  <body style="heigth: 50px">
+  <body style="height: 50px">
     <?php
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -31,8 +31,8 @@
         }
     </style>
 
-  <nav class="navbar navbar-expand-lg bg-body-tertiary" style="heigth: 50px">
-  <div class="container-fluid" style="heigth: 50px">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary" style="height: 50px">
+  <div class="container-fluid" style="height: 50px">
     <a class="navbar-brand" href="login/index.php" ><i class="fa-solid fa-user"></i></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -83,60 +83,60 @@
         <div class="row">
           <div class="col mt-5">
             <?php
-              include("config.php");
+              include("model/config.php");
               switch(@$_REQUEST["page"]){
                 case "clientes":
-                  include("clientes.php");
+                  include("view/clientes/clientes.php");
                   break;
                 case "salvarCliente":
-                  include("salvarCliente.php");
-                  break;
-                case "salvarProduto":
-                  include("salvarProduto.php");
+                  include("model/salvarCliente.php");
                   break;
                 case "listarClientes":
-                  include("listarClientes.php");
+                  include("view/clientes/listarClientes.php");
                   break;
                 case "editarCliente":
-                  include("editarCliente.php");
+                  include("view/clientes/editarCliente.php");
                   break;
-                case "cadastrarPedido":
-                  include("cadastrarPedido.php");
+                case "salvarProduto":
+                  include("model/salvarProduto.php");
                   break;
                 case "cadastrarProduto":
-                  include("cadastrarProduto.php");
+                  include("view/produtos/cadastrarProduto.php");
                   break;
                 case "listarProduto":
-                  include("listarProduto.php");
+                  include("view/produtos/listarProduto.php");
                   break;
                 case "editarProduto":
-                  include("editarProduto.php");
+                  include("view/produtos/editarProduto.php");
                   break;
                 case "estoque":
-                  include("estoque.php");
+                  include("view/produtos/estoque.php");
+                  break;
+                case "cadastrarPedido":
+                  include("view/pedidos/cadastrarPedido.php");
                   break;
                 case "listarPedido":
-                  include("listarPedido.php");
+                  include("view/pedidos/listarPedido.php");
                   break;
                 case "salvarPedido":
-                  include("salvarPedido.php");
+                  include("model/salvarPedido.php");
                   break;
                 case "editarPedido":
-                  include("editarPedido.php");
-                  break;
-                case "historico":
-                  include("historico.php");
-                  break;   
-                case "faturamento":
-                  include("faturamento.php");
-                  break;
-                case "relatorio":
-                  include("relatorio.php");
+                  include("view/pedidos/editarPedido.php");
                   break;
                 case "desconto":
-                  include("desconto.php");
+                  include("view/pedidos/desconto.php");
                   break;
-                  
+                  case "historico":
+                  include("view/extra/historico.php");
+                  break;   
+                case "faturamento":
+                  include("view/extra/faturamento.php");
+                  break;
+                case "relatorio":
+                  include("view/extra/relatorio.php");
+                  break;
+               
                 default: 
                   
 
